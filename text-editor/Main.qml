@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import QtQuick.Dialogs
 import QtQuick.Effects
+import QtCore
 
 ApplicationWindow {
     id: root
