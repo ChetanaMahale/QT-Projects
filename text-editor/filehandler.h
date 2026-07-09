@@ -25,9 +25,8 @@ public:
     int charCount() const;
     int lineCount() const;
 
-    void setIsModified(bool modified);
-
 public slots:
+    void setIsModified(bool modified);
     QString openFile(const QUrl &fileUrl);
     bool saveFile(const QUrl &fileUrl, const QString &content);
     bool saveCurrentFile(const QString &content);
