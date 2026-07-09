@@ -125,6 +125,7 @@ ApplicationWindow {
 
                 // ── Tab 1: Easing Curves ──
                 Item {
+                    id: easingTab
                     anchors.fill: parent
                     visible: root.activeTab === "easing"
 
@@ -150,17 +151,17 @@ ApplicationWindow {
                                         delegate: Rectangle {
                                             required property string modelData
                                             width: easingList.width; height: 32; radius: 6
-                                            color: selectedEasing === modelData ? root.accentDark + "33" : "transparent"
-                                            border.color: selectedEasing === modelData ? root.accent : "transparent"
+                                            color: easingTab.selectedEasing === modelData ? root.accentDark + "33" : "transparent"
+                                            border.color: easingTab.selectedEasing === modelData ? root.accent : "transparent"
                                             Text {
                                                 anchors.centerIn: parent
                                                 text: modelData
                                                 font.pixelSize: 12
-                                                color: selectedEasing === modelData ? root.textPri : root.textSec
+                                                color: easingTab.selectedEasing === modelData ? root.textPri : root.textSec
                                             }
                                             MouseArea {
                                                 anchors.fill: parent; cursorShape: Qt.PointingHandCursor
-                                                onClicked: { selectedEasing = modelData; resetEasingAnimation() }
+                                                onClicked: { easingTab.selectedEasing = modelData; easingTab.resetEasingAnimation() }
                                             }
                                         }
                                     }
@@ -169,6 +170,7 @@ ApplicationWindow {
 
                             // Animation Box Area
                             Rectangle {
+                                id: animationBox
                                 Layout.fillWidth: true; Layout.fillHeight: true; radius: 12; color: root.bgBase
                                 border.color: root.border; clip: true
 
@@ -184,7 +186,7 @@ ApplicationWindow {
                                     width: 32; height: 32; radius: 16
                                     color: root.accent
                                     x: 40
-                                    y: parent.height / 2 - 16
+                                    y: animationBox.height / 2 - 16
 
                                     // Easing Glow
                                     Rectangle {
@@ -236,10 +238,10 @@ ApplicationWindow {
                                     target: easingBall
                                     property: "x"
                                     from: 40
-                                    to: parent.width - 72
+                                    to: animationBox.width - 72
                                     duration: animController.getCalculatedDuration(1500)
                                     easing.type: {
-                                        switch (selectedEasing) {
+                                        switch (easingTab.selectedEasing) {
                                         case "OutBounce": return Easing.OutBounce
                                         case "OutBack": return Easing.OutBack
                                         case "InOutElastic": return Easing.InOutElastic
@@ -248,8 +250,8 @@ ApplicationWindow {
                                         default: return Easing.Linear
                                         }
                                     }
-                                    onStarted: animController.logAnimationStart("Easing Curve", selectedEasing)
-                                    onStopped: animController.logAnimationComplete("Easing Curve", selectedEasing)
+                                    onStarted: animController.logAnimationStart("Easing Curve", easingTab.selectedEasing)
+                                    onStopped: animController.logAnimationComplete("Easing Curve", easingTab.selectedEasing)
                                 }
                             }
                         }
@@ -263,7 +265,7 @@ ApplicationWindow {
                                 Text { anchors.centerIn: parent; text: "Start Animation"; font.bold: true; color: "white"; font.pixelSize: 12 }
                                 MouseArea {
                                     anchors.fill: parent; cursorShape: Qt.PointingHandCursor
-                                    onClicked: { resetEasingAnimation(); easingAnim.start() }
+                                    onClicked: { easingTab.resetEasingAnimation(); easingAnim.start() }
                                 }
                             }
                         }
