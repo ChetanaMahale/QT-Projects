@@ -34,6 +34,16 @@ ApplicationWindow {
     property int  editingId:    -1
     property bool showAddPanel: false
 
+    // ── Helper function ────────────────────────────────────────────────────────
+    function doAddTask() {
+        if (titleInput.text.trim() !== "") {
+            todoManager.addTodo(titleInput.text, prioritySelector.current)
+            titleInput.text = ""
+            prioritySelector.current = 1
+            root.showAddPanel = false
+        }
+    }
+
     // ── Background blobs ──────────────────────────────────────────────────────
     Canvas {
         id: bgCanvas
@@ -151,7 +161,7 @@ ApplicationWindow {
                         selectionColor: root.accent + "66"
                         placeholderText: "What needs to be done?"
                         placeholderTextColor: root.textMuted
-                        Keys.onReturnPressed: addTaskBtn.clicked()
+                        Keys.onReturnPressed: root.doAddTask()
                         Keys.onEscapePressed: root.showAddPanel = false
                     }
                 }
@@ -205,7 +215,6 @@ ApplicationWindow {
                         id: addTaskBtn
                         width: 80; height: 34; radius: 10
                         color: root.accentDark
-                        property alias clicked: addTaskMa.clicked
 
                         Text {
                             anchors.centerIn: parent
@@ -215,17 +224,9 @@ ApplicationWindow {
                             color: "white"
                         }
                         MouseArea {
-                            id: addTaskMa
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                if (titleInput.text.trim() !== "") {
-                                    todoManager.addTodo(titleInput.text, prioritySelector.current)
-                                    titleInput.text = ""
-                                    prioritySelector.current = 1
-                                    root.showAddPanel = false
-                                }
-                            }
+                            onClicked: root.doAddTask()
                         }
                     }
                 }
