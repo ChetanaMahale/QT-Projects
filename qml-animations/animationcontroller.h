@@ -14,16 +14,13 @@ class AnimationController : public QObject
 
 public:
     explicit AnimationController(QObject *parent = nullptr);
-
     int baseDuration() const;
-    void setBaseDuration(int duration);
-
     double speedMultiplier() const;
-    void setSpeedMultiplier(double multiplier);
-
     QString lastLog() const;
 
 public slots:
+    void setBaseDuration(int duration);
+    void setSpeedMultiplier(double multiplier);
     void logAnimationStart(const QString &category, const QString &type);
     void logAnimationComplete(const QString &category, const QString &type);
     int getCalculatedDuration(int originalDuration) const;

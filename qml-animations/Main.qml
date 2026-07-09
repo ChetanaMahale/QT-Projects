@@ -633,7 +633,7 @@ ApplicationWindow {
                         value: animController.speedMultiplier
                         stepSize: 0.25
                         onMoved: {
-                            animController.setSpeedMultiplier(speedSlider.value)
+                            animController.speedMultiplier = speedSlider.value
                         }
                     }
 
