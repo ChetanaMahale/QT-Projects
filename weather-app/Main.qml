@@ -67,14 +67,13 @@ ApplicationWindow {
                     TextInput {
                         id: apiKeyInput
                         Layout.fillWidth: true
-                        placeholderText: "API Key"
                         color: root.textPri
                         font.pixelSize: 13
                         echoMode: TextInput.Password
                         onTextChanged: weather.apiKey = text
                         Text {
                             anchors.fill: parent
-                            text: parent.placeholderText
+                            text: "API Key"
                             color: Qt.rgba(1, 1, 1, 0.35)
                             font.pixelSize: 13
                             visible: parent.text.length === 0
@@ -96,13 +95,12 @@ ApplicationWindow {
                     TextInput {
                         id: cityInput
                         Layout.fillWidth: true
-                        placeholderText: "Search city… (e.g. London)"
                         color: root.textPri
                         font.pixelSize: 14
                         onAccepted: weather.fetchWeather(cityInput.text)
                         Text {
                             anchors.fill: parent
-                            text: parent.placeholderText
+                            text: "Search city… (e.g. London)"
                             color: Qt.rgba(1, 1, 1, 0.35)
                             font.pixelSize: 14
                             visible: parent.text.length === 0
