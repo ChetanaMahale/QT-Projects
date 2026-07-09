@@ -153,14 +153,23 @@ ApplicationWindow {
                     border.width: 1
                     Behavior on border.color { ColorAnimation { duration: 150 } }
 
+                    // Manual placeholder text
+                    Text {
+                        anchors { left: parent.left; right: parent.right
+                                  verticalCenter: parent.verticalCenter; margins: 14 }
+                        text: "What needs to be done?"
+                        font.pixelSize: 15
+                        color: root.textMuted
+                        visible: titleInput.text.length === 0 && !titleInput.activeFocus
+                    }
+
                     TextInput {
                         id: titleInput
-                        anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter; margins: 14 }
+                        anchors { left: parent.left; right: parent.right
+                                  verticalCenter: parent.verticalCenter; margins: 14 }
                         font.pixelSize: 15
                         color: root.textPri
                         selectionColor: root.accent + "66"
-                        placeholderText: "What needs to be done?"
-                        placeholderTextColor: root.textMuted
                         Keys.onReturnPressed: root.doAddTask()
                         Keys.onEscapePressed: root.showAddPanel = false
                     }
