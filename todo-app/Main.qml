@@ -127,25 +127,30 @@ ApplicationWindow {
             id: addPanel
             Layout.fillWidth: true
             Layout.topMargin: 10
-            Layout.bottomMargin: root.showAddPanel ? 10 : 0
-            height: root.showAddPanel ? addPanelContent.implicitHeight + 28 : 0
+            Layout.bottomMargin: root.showAddPanel ? 12 : 0
+            height: root.showAddPanel ? 128 : 0
             clip: true
             radius: 18
             color: root.bgPanel
-            border.color: root.border
+            border.color: root.accent + "44"
             border.width: 1
-            visible: height > 2
+            visible: height > 1
 
-            Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+            Behavior on height         { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+            Behavior on Layout.bottomMargin { NumberAnimation { duration: 220 } }
 
-            ColumnLayout {
+            Column {
                 id: addPanelContent
-                anchors { left: parent.left; right: parent.right; top: parent.top; margins: 14 }
+                anchors {
+                    left: parent.left; right: parent.right
+                    top: parent.top
+                    margins: 14
+                }
                 spacing: 10
 
-                // Title input
+                // Title input box
                 Rectangle {
-                    Layout.fillWidth: true
+                    width: parent.width
                     height: 44
                     radius: 12
                     color: root.bgInput
@@ -153,7 +158,6 @@ ApplicationWindow {
                     border.width: 1
                     Behavior on border.color { ColorAnimation { duration: 150 } }
 
-                    // Manual placeholder text
                     Text {
                         anchors { left: parent.left; right: parent.right
                                   verticalCenter: parent.verticalCenter; margins: 14 }
@@ -162,7 +166,6 @@ ApplicationWindow {
                         color: root.textMuted
                         visible: titleInput.text.length === 0 && !titleInput.activeFocus
                     }
-
                     TextInput {
                         id: titleInput
                         anchors { left: parent.left; right: parent.right
@@ -175,12 +178,13 @@ ApplicationWindow {
                     }
                 }
 
-                // Priority selector + Add button
-                RowLayout {
-                    Layout.fillWidth: true
+                // Priority + Add button row
+                Row {
+                    width: parent.width
                     spacing: 8
 
                     Text {
+                        anchors.verticalCenter: parent.verticalCenter
                         text: "Priority:"
                         font.pixelSize: 13
                         color: root.textSec
@@ -189,23 +193,21 @@ ApplicationWindow {
                     Repeater {
                         model: ["Low", "Med", "High"]
                         Rectangle {
-                            required property int index
+                            required property int    index
                             required property string modelData
                             width: 52; height: 30; radius: 8
+                            anchors.verticalCenter: parent.verticalCenter
                             color: prioritySelector.current === index
-                                   ? root.priorityColors[index] + "33"
-                                   : root.bgInput
+                                   ? root.priorityColors[index] + "33" : root.bgInput
                             border.color: prioritySelector.current === index
-                                          ? root.priorityColors[index]
-                                          : root.border
+                                          ? root.priorityColors[index] : root.border
                             border.width: 1
                             Text {
                                 anchors.centerIn: parent
-                                text: modelData
+                                text: parent.modelData
                                 font.pixelSize: 12
-                                color: prioritySelector.current === index
-                                       ? root.priorityColors[index]
-                                       : root.textSec
+                                color: prioritySelector.current === parent.index
+                                       ? root.priorityColors[parent.index] : root.textSec
                             }
                             MouseArea {
                                 anchors.fill: parent
@@ -215,16 +217,18 @@ ApplicationWindow {
                         }
                     }
 
-                    QtObject { id: prioritySelector; property int current: 1 }
+                    // Spacer
+                    Item {
+                        width: parent.width - 90 - 3*(52+8) - 8
+                        height: 1
+                    }
 
-                    Item { Layout.fillWidth: true }
-
-                    // Add task button
+                    // Add button
                     Rectangle {
                         id: addTaskBtn
-                        width: 80; height: 34; radius: 10
+                        width: 82; height: 30; radius: 9
+                        anchors.verticalCenter: parent.verticalCenter
                         color: root.accentDark
-
                         Text {
                             anchors.centerIn: parent
                             text: "Add Task"
@@ -240,6 +244,9 @@ ApplicationWindow {
                     }
                 }
             }
+
+            // Priority selector state
+            QtObject { id: prioritySelector; property int current: 1 }
         }
 
         // ── Filter tabs ───────────────────────────────────────────────────────
