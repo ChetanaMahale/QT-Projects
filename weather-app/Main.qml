@@ -13,9 +13,9 @@ ApplicationWindow {
 
     // ── Theme ────────────────────────────────────────────────────────────────
     readonly property color textPri:   "#ffffff"
-    readonly property color textSec:   "rgba(255,255,255,0.65)"
-    readonly property color cardBg:    "rgba(255,255,255,0.10)"
-    readonly property color cardBord:  "rgba(255,255,255,0.15)"
+    readonly property color textSec:   Qt.rgba(1, 1, 1, 0.65)
+    readonly property color cardBg:    Qt.rgba(1, 1, 1, 0.10)
+    readonly property color cardBord:  Qt.rgba(1, 1, 1, 0.15)
 
     // ── Animated background gradient ─────────────────────────────────────────
     Rectangle {
@@ -35,13 +35,13 @@ ApplicationWindow {
     Rectangle {
         width: 340; height: 340; radius: 170
         x: -80; y: -80
-        color: "rgba(255,255,255,0.04)"
+        color: Qt.rgba(1, 1, 1, 0.04)
         layer.enabled: true
     }
     Rectangle {
         width: 260; height: 260; radius: 130
         x: parent.width - 120; y: parent.height - 120
-        color: "rgba(255,255,255,0.04)"
+        color: Qt.rgba(1, 1, 1, 0.04)
     }
 
     // ── Main content ─────────────────────────────────────────────────────────
@@ -75,7 +75,7 @@ ApplicationWindow {
                         Text {
                             anchors.fill: parent
                             text: parent.placeholderText
-                            color: "rgba(255,255,255,0.35)"
+                            color: Qt.rgba(1, 1, 1, 0.35)
                             font.pixelSize: 13
                             visible: parent.text.length === 0
                         }
@@ -87,7 +87,8 @@ ApplicationWindow {
             Rectangle {
                 Layout.fillWidth: true; height: 44; radius: 12
                 color: cardBg
-                border.color: cityInput.activeFocus ? "rgba(255,255,255,0.5)" : cardBord; border.width: 1
+                border.color: cityInput.activeFocus ? Qt.rgba(1, 1, 1, 0.5) : cardBord
+                border.width: 1
 
                 RowLayout {
                     anchors.fill: parent; anchors.margins: 12; spacing: 8
@@ -102,7 +103,7 @@ ApplicationWindow {
                         Text {
                             anchors.fill: parent
                             text: parent.placeholderText
-                            color: "rgba(255,255,255,0.35)"
+                            color: Qt.rgba(1, 1, 1, 0.35)
                             font.pixelSize: 14
                             visible: parent.text.length === 0
                         }
@@ -113,7 +114,7 @@ ApplicationWindow {
             // Search button
             Rectangle {
                 width: 100; height: 44; radius: 12
-                color: srchMa.pressed ? "rgba(255,255,255,0.25)" : (srchMa.containsMouse ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.12)")
+                color: srchMa.pressed ? Qt.rgba(1,1,1,0.25) : (srchMa.containsMouse ? Qt.rgba(1,1,1,0.20) : Qt.rgba(1,1,1,0.12))
                 border.color: cardBord; border.width: 1
                 Behavior on color { ColorAnimation { duration: 120 } }
                 Text {
@@ -133,7 +134,7 @@ ApplicationWindow {
             Rectangle {
                 width: 44; height: 44; radius: 12
                 visible: weather.hasData
-                color: rfMa.containsMouse ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.1)"
+                color: rfMa.containsMouse ? Qt.rgba(1,1,1,0.20) : Qt.rgba(1,1,1,0.10)
                 border.color: cardBord; border.width: 1
                 Text { anchors.centerIn: parent; text: "↻"; font.pixelSize: 20; color: root.textPri }
                 MouseArea {
@@ -149,8 +150,8 @@ ApplicationWindow {
         Rectangle {
             Layout.fillWidth: true; height: 40; radius: 10
             visible: weather.errorMessage.length > 0
-            color: "rgba(220,60,60,0.25)"
-            border.color: "rgba(220,60,60,0.5)"; border.width: 1
+            color: Qt.rgba(0.86, 0.24, 0.24, 0.25)
+            border.color: Qt.rgba(0.86, 0.24, 0.24, 0.5); border.width: 1
             RowLayout { anchors.fill: parent; anchors.margins: 12; spacing: 8
                 Text { text: "⚠️" }
                 Text {
@@ -242,7 +243,7 @@ ApplicationWindow {
                     // Feels like
                     Rectangle {
                         Layout.fillWidth: true; height: 40; radius: 10
-                        color: "rgba(255,255,255,0.07)"
+                        color: Qt.rgba(1, 1, 1, 0.07)
                         RowLayout {
                             anchors.fill: parent; anchors.margins: 12; spacing: 8
                             Text { text: "🌡️"; font.pixelSize: 16 }
@@ -255,13 +256,17 @@ ApplicationWindow {
 
                     // Sunrise / Sunset
                     RowLayout { spacing: 8
-                        Rectangle { Layout.fillWidth: true; height: 36; radius: 10; color: "rgba(255,255,255,0.07)"
+                        Rectangle {
+                            Layout.fillWidth: true; height: 36; radius: 10
+                            color: Qt.rgba(1, 1, 1, 0.07)
                             RowLayout { anchors.fill: parent; anchors.margins: 10; spacing: 6
                                 Text { text: "🌅"; font.pixelSize: 14 }
                                 Text { text: weather.sunriseTime; color: root.textPri; font.pixelSize: 12 }
                             }
                         }
-                        Rectangle { Layout.fillWidth: true; height: 36; radius: 10; color: "rgba(255,255,255,0.07)"
+                        Rectangle {
+                            Layout.fillWidth: true; height: 36; radius: 10
+                            color: Qt.rgba(1, 1, 1, 0.07)
                             RowLayout { anchors.fill: parent; anchors.margins: 10; spacing: 6
                                 Text { text: "🌇"; font.pixelSize: 14 }
                                 Text { text: weather.sunsetTime; color: root.textPri; font.pixelSize: 12 }
@@ -328,7 +333,7 @@ ApplicationWindow {
                                 required property var modelData
                                 required property int index
                                 width: ListView.view.width; height: 44; radius: 10
-                                color: index % 2 === 0 ? "rgba(255,255,255,0.04)" : "transparent"
+                                color: index % 2 === 0 ? Qt.rgba(1,1,1,0.04) : "transparent"
 
                                 RowLayout {
                                     anchors.fill: parent; anchors.leftMargin: 10; anchors.rightMargin: 10; spacing: 12
@@ -359,7 +364,7 @@ ApplicationWindow {
             Text {
                 Layout.alignment: Qt.AlignHCenter
                 text: "Get a free API key at openweathermap.org/api"
-                color: "rgba(255,255,255,0.4)"; font.pixelSize: 12
+                color: Qt.rgba(1, 1, 1, 0.4); font.pixelSize: 12
             }
             Item { Layout.fillHeight: true }
         }
