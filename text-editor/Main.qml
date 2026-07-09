@@ -468,7 +468,7 @@ ApplicationWindow {
         signal clicked
 
         Layout.fillWidth: true
-        height: width
+        Layout.preferredHeight: 44
         radius: 12
         color: btnMa.pressed ? "#23232c" : (btnMa.containsMouse ? "#1c1c24" : "transparent")
 
