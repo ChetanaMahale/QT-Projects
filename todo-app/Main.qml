@@ -128,15 +128,15 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.topMargin: 10
             Layout.bottomMargin: root.showAddPanel ? 12 : 0
-            height: root.showAddPanel ? 128 : 0
+            Layout.preferredHeight: root.showAddPanel ? 128 : 0
             clip: true
             radius: 18
             color: root.bgPanel
             border.color: root.accent + "44"
             border.width: 1
-            visible: height > 1
+            visible: Layout.preferredHeight > 1
 
-            Behavior on height         { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+            Behavior on Layout.preferredHeight { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
             Behavior on Layout.bottomMargin { NumberAnimation { duration: 220 } }
 
             Column {
