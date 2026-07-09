@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import QtQuick.Effects
-import QtCore
+
 
 ApplicationWindow {
     id: root
@@ -113,17 +113,19 @@ ApplicationWindow {
                                 spacing: 2
                                 Layout.fillWidth: true
                                 Text {
-                                    text: parent.parent.parent.title
+                                    text: title
                                     font.pixelSize: 13
                                     font.bold: true
-                                    color: playerManager.currentTrackIndex === parent.parent.parent.index ? root.textPri : root.textSec
+                                    color: playerManager.currentTrackIndex === index ? root.textPri : root.textSec
                                     elide: Text.ElideRight
+                                    Layout.fillWidth: true
                                 }
                                 Text {
-                                    text: parent.parent.parent.artist
+                                    text: artist
                                     font.pixelSize: 11
                                     color: root.textSec
                                     elide: Text.ElideRight
+                                    Layout.fillWidth: true
                                 }
                             }
 
@@ -140,7 +142,7 @@ ApplicationWindow {
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onClicked: {
-                                playerManager.setCurrentTrackIndex(index)
+                                playerManager.currentTrackIndex = index
                             }
                         }
                     }
@@ -294,10 +296,10 @@ ApplicationWindow {
 
                     Text {
                         anchors.centerIn: parent
+                        anchors.horizontalCenterOffset: playerManager.isPlaying ? 0 : 1
                         text: playerManager.isPlaying ? "⏸" : "▶"
                         font.pixelSize: 22
                         color: "white"
-                        x: playerManager.isPlaying ? 0 : 2 // Offset play symbol slightly for visual centering
                     }
 
                     MouseArea {

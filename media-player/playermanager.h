@@ -62,7 +62,7 @@ public slots:
     void previous();
     void togglePlay();
     void toggleMute();
-    QString formatTime(int seconds) const;
+    Q_INVOKABLE QString formatTime(int seconds) const;
 
 signals:
     void currentTrackIndexChanged();
