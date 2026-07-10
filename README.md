@@ -16,12 +16,13 @@ A collection of **Qt 6 (C++ / QML)** showcase applications — from UI fundament
 | 6 | [🎬 QML Animations](./qml-animations/) | Interactive sandbox for easing curves & transforms | SequentialAnimation, PathAnimation |
 | 7 | [📻 Media Player](./media-player/) | Music player with playlist & vinyl visualization | QTimer, QML RotationAnimation |
 | 8 | [🌤️ Weather App](./weather-app/) | Live weather dashboard with 5-day forecast | QNetworkAccessManager, OpenWeatherMap API |
+| 9 | [💰 Expense Tracker](./expense-tracker/) | Personal finance tracker with SQLite, donut chart & monthly trends | Qt Sql, SQLite, QML Canvas, Qt Charts |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Qt 6.5+** — Quick, Network, Multimedia
+- **Qt 6.5+** — Quick, Network, Multimedia, Sql
 - **CMake 3.16+** — cross-platform build
 - **QML** — declarative UI with animations
 - **C++ (Qt Slots/Signals)** — backend logic and data management
